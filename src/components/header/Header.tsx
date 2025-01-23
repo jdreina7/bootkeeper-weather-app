@@ -4,6 +4,8 @@ import logo from '../../assets/logo.svg';
 import { APP_TITLE } from '../../utils/constants';
 import { Button, TextField } from '@mui/material';
 import { CustomThemeSwitch } from '../customThemeSwitch/CustomThemeSwitch';
+import { useContext } from 'react';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -31,6 +33,13 @@ const HeaderSection = styled.div<HeaderSectionProps>`
 `;
 
 export const Header = () => {
+
+  const { theme, setTheme } = useContext(ThemeContext);
+
+  const handleThemeChange = () => {
+    const newTheme = theme === 'Light' ? 'Dark' : 'Light';
+    setTheme( newTheme);
+  };
   return (
     <HeaderContainer>
       <HeaderSection direction="left" percentage={30}>
@@ -44,7 +53,7 @@ export const Header = () => {
       </HeaderSection>
 
       <HeaderSection direction="right" percentage={30}>
-        <CustomThemeSwitch />
+        <CustomThemeSwitch handleThemeChange={handleThemeChange} />
       </HeaderSection>
     </HeaderContainer>
   );
