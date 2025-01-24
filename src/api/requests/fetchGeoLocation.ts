@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API_URL = 'http://api.openweathermap.org/geo/1.0/direct';
-const API_KEY = '2301773635767d14666ebdd35465f147';
+const API_KEY = import.meta.env.VITE_OPENWEATHER_API_KEY;
 
 export const fetchGeoLocation = async (query: string): Promise<[]> => {
   if (!query) return [];

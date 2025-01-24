@@ -1,6 +1,7 @@
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useContext } from 'react';
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import { ThemeContext } from '../../context/ThemeContext';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -63,7 +64,8 @@ interface CustomThemeSwitchProps {
 }
 
 export const CustomThemeSwitch = ({ handleThemeChange }: CustomThemeSwitchProps) => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <MaterialUISwitch sx={{ m: 1 }} onChange={handleThemeChange} />
+    <MaterialUISwitch sx={{ m: 1 }} onChange={handleThemeChange} checked={ theme === 'Dark' ? true : false } />
   );
 }

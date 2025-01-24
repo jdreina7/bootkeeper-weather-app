@@ -12,6 +12,6 @@ createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
     <ThemeContextProvider>
         <App />
-    </ThemeContextProvider>,
+    </ThemeContextProvider>
   </QueryClientProvider>
 )

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { TextField, Autocomplete, Box } from "@mui/material";
+import { TextField, Autocomplete, Box, CircularProgress } from "@mui/material";
 
 import { useGeoLocationQuery } from "../../api/querys/useGeoLocationQuery";
 import WhereToVoteIcon from '@mui/icons-material/WhereToVote';
@@ -42,6 +42,17 @@ export const AutocompleteGeo: React.FC = () => {
           label="Search City"
           variant="outlined"
           fullWidth
+          slotProps={{
+            input: {
+              ...params.InputProps,
+              endAdornment: (
+                <React.Fragment>
+                  {isLoading ? <CircularProgress color="inherit" size={20} /> : null}
+                  {params.InputProps.endAdornment}
+                </React.Fragment>
+              ),
+            },
+          }}
         />
       )}
     />
