@@ -1,11 +1,12 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 
 import logo from '../../assets/logo.svg';
 import { APP_TITLE } from '../../utils/constants';
-import { Button, TextField } from '@mui/material';
+
 import { CustomThemeSwitch } from '../customThemeSwitch/CustomThemeSwitch';
-import { useContext } from 'react';
 import { ThemeContext } from '../../context/ThemeContext';
+import { CustomSearchField } from '../customSearchField/CustomSearchField';
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -48,8 +49,7 @@ export const Header = () => {
       </HeaderSection>
 
       <HeaderSection direction="center" percentage={30}>
-        <TextField id="outlined-basic" label="Search City" variant="outlined" />
-        <Button variant="contained">Search</Button>
+        <CustomSearchField />
       </HeaderSection>
 
       <HeaderSection direction="right" percentage={30}>
