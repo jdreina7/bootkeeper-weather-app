@@ -1,11 +1,10 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 
-import logo from '../../assets/logo.svg';
-import { APP_TITLE } from '../../utils/constants';
+import logo from '../../assets/logo.png';
 
 import { CustomThemeSwitch } from '../customThemeSwitch/CustomThemeSwitch';
-import { ThemeContext } from '../../context/ThemeContext';
+import { ThemeContext } from '../../context/theme/ThemeContext';
 import { CustomSearchField } from '../customSearchField/CustomSearchField';
 
 const HeaderContainer = styled.header`
@@ -21,16 +20,25 @@ const HeaderContainer = styled.header`
   }
 `;
 
-interface HeaderSectionProps {
-  direction: 'left' | 'right' | 'center';
-  percentage: number;
-}
-
-const HeaderSection = styled.div<HeaderSectionProps>`
+const HeaderLogoSection = styled.div`
   display: flex;
   align-items: center;
-  justify-content: ${({ direction }) => direction};
-  width: ${({ percentage }) => percentage}%;
+  justify-content: left;
+  width: 30%;
+`;
+
+const HeaderSearchSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+`;
+
+const HeaderSwitchThemeSection = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  width: 20%;
 `;
 
 export const Header = () => {
@@ -43,18 +51,17 @@ export const Header = () => {
   };
   return (
     <HeaderContainer>
-      <HeaderSection direction="left" percentage={30}>
-        <img src={logo} alt="JDR Weather App" width={"20%"} />
-        <h1 className="app-title">{APP_TITLE}</h1>
-      </HeaderSection>
+      <HeaderLogoSection>
+        <img src={logo} alt="JDR Weather App" width={"80%"} />
+      </HeaderLogoSection>
 
-      <HeaderSection direction="center" percentage={30}>
+      <HeaderSearchSection>
         <CustomSearchField />
-      </HeaderSection>
+      </HeaderSearchSection>
 
-      <HeaderSection direction="right" percentage={30}>
+      <HeaderSwitchThemeSection >
         <CustomThemeSwitch handleThemeChange={handleThemeChange} />
-      </HeaderSection>
+      </HeaderSwitchThemeSection>
     </HeaderContainer>
   );
 };

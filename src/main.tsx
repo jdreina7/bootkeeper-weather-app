@@ -4,14 +4,17 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import './index.css'
 
 import App from './App.tsx'
-import { ThemeContextProvider } from './context/ThemeContextProvider.tsx'
+import { ThemeContextProvider } from './context/theme/ThemeContextProvider.tsx'
+import { CityWeatherContextProvider } from './context/cityWheather/CityWeatherContext.tsx'
 
 const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <QueryClientProvider client={queryClient}>
-    <ThemeContextProvider>
-        <App />
-    </ThemeContextProvider>
+    <CityWeatherContextProvider>
+      <ThemeContextProvider>
+          <App />
+      </ThemeContextProvider>
+    </CityWeatherContextProvider>
   </QueryClientProvider>
 )

@@ -1,12 +1,26 @@
+import { useContext } from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
+import styled from 'styled-components';
 
 import './index.css';
 
 import { Content } from './components/content/Content';
 import { Footer } from './components/footer/Footer';
 import { Header } from './components/header/Header';
-import { useContext } from 'react';
-import { ThemeContext } from './context/ThemeContext';
+import { ThemeContext } from './context/theme/ThemeContext';
+
+const AppContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`;
+
+const ContentWrapper = styled.main`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 
 function App() {
@@ -20,10 +34,14 @@ function App() {
 
   return (
       <ThemeProvider theme={appTheme}>
-        <CssBaseline />
-        <Header />
-        <Content />
-        <Footer />
+        <AppContainer>
+          <CssBaseline />
+          <Header />
+          <ContentWrapper>
+            <Content />
+          </ContentWrapper>
+          <Footer />
+        </AppContainer>
       </ThemeProvider>
   )
 }
