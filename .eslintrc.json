@@ -20,12 +20,9 @@
       "plugin:prettier/recommended"
     ],
     "rules": {
-      // Integración con Prettier
       "prettier/prettier": "error",
-      // Reglas específicas de React
-      "react/react-in-jsx-scope": "off", // No necesario desde React 17+
-      "react/prop-types": "off", // Usamos TypeScript para tipado
-      // Reglas estrictas de TypeScript
+      "react/react-in-jsx-scope": "off",
+      "react/prop-types": "off",
       "@typescript-eslint/explicit-function-return-type": "error",
       "@typescript-eslint/explicit-module-boundary-types": "error",
       "@typescript-eslint/no-explicit-any": "error",

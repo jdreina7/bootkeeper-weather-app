@@ -19,7 +19,8 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': "off",
+      "react-refresh/only-export-components": "off",
+      "no-multiple-empty-lines": [ "error", { "max": 1, "maxEOF": 0, "maxBOF": 0 }],
     },
   },
 )

@@ -1,8 +1,8 @@
 import { CityDataType } from "./types";
 
 export interface CityContextInterface {
-  cityWeatherData: CityDataType | null;
-  setCityWeatherData: (data: CityDataType) => void;
+  cityCoords: CityDataType | null;
+  setCityCoords: (data: CityDataType) => void;
   weatherData: weatherDataInterface | null;
   setWeatherData: (data: weatherDataInterface) => void;
   isFetchingWeather: boolean | null;

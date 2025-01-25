@@ -6,12 +6,15 @@ import logo from '../../assets/logo.png';
 import { CustomThemeSwitch } from '../customThemeSwitch/CustomThemeSwitch';
 import { ThemeContext } from '../../context/theme/ThemeContext';
 import { CustomSearchField } from '../customSearchField/CustomSearchField';
+import { CurrentLocationButton } from '../currentLocationBtn/CurrentLocationButton';
+import { Grid2 } from '@mui/material';
 
 const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   flex-direction: row;
   padding: 1em;
+  width: 100%;
 
   .app-title {
     font-size: 3em;
@@ -20,48 +23,53 @@ const HeaderContainer = styled.header`
   }
 `;
 
-const HeaderLogoSection = styled.div`
+const HeaderSwitchThemeSection = styled(Grid2)`
   display: flex;
-  align-items: center;
-  justify-content: left;
-  width: 30%;
+  width: 100%;
+  justify-content: flex-end;
 `;
 
-const HeaderSearchSection = styled.div`
+const HeaderLogoSection = styled(Grid2)`
+  display: flex;
+  align-items: top;
+  justify-content: center;
+`;
+
+const HeaderSearchSection = styled(Grid2)`
+  display: flex;
+  align-items: top;
+  justify-content: center;
+`;
+
+const HeaderCurrentLocation = styled(Grid2)`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50%;
-`;
-
-const HeaderSwitchThemeSection = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: right;
-  width: 20%;
 `;
 
 export const Header = () => {
-
   const { theme, setTheme } = useContext(ThemeContext);
 
   const handleThemeChange = () => {
     const newTheme = theme === 'Light' ? 'Dark' : 'Light';
-    setTheme( newTheme);
+    setTheme(newTheme);
   };
   return (
-    <HeaderContainer>
-      <HeaderLogoSection>
-        <img src={logo} alt="JDR Weather App" width={"80%"} />
-      </HeaderLogoSection>
-
-      <HeaderSearchSection>
-        <CustomSearchField />
-      </HeaderSearchSection>
-
-      <HeaderSwitchThemeSection >
+    <Grid2 container spacing={2}>
+      <HeaderSwitchThemeSection size={12}>
         <CustomThemeSwitch handleThemeChange={handleThemeChange} />
       </HeaderSwitchThemeSection>
-    </HeaderContainer>
+      <HeaderContainer>
+        <HeaderLogoSection size={4}>
+          <img src={logo} alt="Instant Weather" width={'50%'} />
+        </HeaderLogoSection>
+        <HeaderSearchSection size={4}>
+          <CustomSearchField />
+        </HeaderSearchSection>
+        <HeaderCurrentLocation size={4}>
+          <CurrentLocationButton />
+        </HeaderCurrentLocation>
+      </HeaderContainer>
+    </Grid2>
   );
 };

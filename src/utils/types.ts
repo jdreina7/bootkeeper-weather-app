@@ -4,10 +4,6 @@ export type ThemeContextType = {
 };
 
 export type CityDataType = {
-  name: string;
-  country: string;
-  state?: string;
-  local_names?: object;
   lat?: number;
   lon?: number;
 };

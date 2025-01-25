@@ -1,19 +1,43 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TextField, Autocomplete, Box, CircularProgress } from "@mui/material";
 
-import { useGeoLocationQuery } from "../../api/querys/useGeoLocationQuery";
+import { useGeoLocationQuery, useWeatherByCoords } from "../../api/querys";
 import WhereToVoteIcon from '@mui/icons-material/WhereToVote';
 import { LocationOptionType } from "../../utils/types";
 import { useCityWeatherContext } from "../../context/cityWheather/CityWeatherContext";
+import { Coord } from "../../utils/interfaces";
 
 const max = 1000000000;
 
-
 export const AutocompleteGeo: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [cityCoords, setCityCoords] = useState<Coord>()
   const { data, isLoading, error } = useGeoLocationQuery(searchTerm);
-  const { setCityWeatherData } = useCityWeatherContext();
+  const { setWeatherData, setIsFetchingWeather } = useCityWeatherContext();
   const dynamicKey = Math.floor(Math.random() * max);
+  const { refetch, isFetching } = useWeatherByCoords({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 }!);
+
+  useEffect(() => {
+    async function fetchData() {
+      if (cityCoords) {
+        const makeRefetch = async () => {
+          const result = await refetch();
+      
+          if (isFetching) {
+            setIsFetchingWeather(true);
+          }
+      
+          if (result.data) {
+            setWeatherData(result.data);
+            setIsFetchingWeather(false);
+          }
+        };
+
+        makeRefetch();
+      }
+    }
+    fetchData();
+  }, [cityCoords]);
 
   const options = data?.map((location: LocationOptionType) => ({
     key: `${dynamicKey}-${location.lat}-${location.lon}`,
@@ -36,7 +60,7 @@ export const AutocompleteGeo: React.FC = () => {
       onInputChange={(_, value) => setSearchTerm(value)}
       onChange={(_, selectedOption) => {
         if (selectedOption) {
-          setCityWeatherData(selectedOption);
+          setCityCoords({ lat: selectedOption.lat || 0, lon: selectedOption.lon || 0 });
         }
       }}
       renderOption={(props, option) => {
@@ -53,7 +77,6 @@ export const AutocompleteGeo: React.FC = () => {
           {...params}
           label="Search City"
           variant="outlined"
-          fullWidth
           slotProps={{
             input: {
               ...params.InputProps,

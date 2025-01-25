@@ -6,15 +6,15 @@ import { CityContextInterface, weatherDataInterface } from '../../utils/interfac
 const CityWeatherContext = createContext<CityContextInterface | undefined>(undefined);
 
 export const CityWeatherContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cityWeatherData, setCityWeatherData] = useState<CityDataType | null>(null);
+  const [cityCoords, setCityCoords] = useState<CityDataType | null>(null);
   const [weatherData, setWeatherData] = useState<weatherDataInterface | null>(null);
   const [isFetchingWeather, setIsFetchingWeather] = useState<boolean | null>(null);
 
   return (
     <CityWeatherContext.Provider
       value={{
-        cityWeatherData,
-        setCityWeatherData,
+        cityCoords,
+        setCityCoords,
         weatherData,
         setWeatherData,
         isFetchingWeather,

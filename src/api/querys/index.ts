@@ -1,7 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
 
-import { fetchWeatherByCoords } from "../requests/fetchWeatherByCoords";
 import { Coord } from "../../utils/interfaces";
+import { fetchGeoLocation, fetchWeatherByCoords } from "../requests";
+
+export const useGeoLocationQuery = (query: string) => {
+  return useQuery({
+    queryKey: ["geoLocation", query],
+    queryFn: () => fetchGeoLocation(query),
+    enabled: !!query,
+  });
+};
 
 export const useWeatherByCoords = (coords: Coord) => {
   return useQuery({
