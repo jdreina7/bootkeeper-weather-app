@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { TextField, Autocomplete, Box, CircularProgress } from "@mui/material";
 
-import { useAirPollution, useGeoLocationQuery, useWeatherByCoords } from "../../../api/querys";
+import { useAirPollution, useForecastData, useGeoLocationQuery, useWeatherByCoords } from "../../../api/querys";
 import WhereToVoteIcon from '@mui/icons-material/WhereToVote';
 import { LocationOptionType } from "../../../utils/types";
 import { useCityWeatherContext } from "../../../context/cityWheather/CityWeatherContext";
@@ -14,11 +14,12 @@ export const AutocompleteGeo: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [cityCoords, setCityCoords] = useState<Coord>()
   const { data, isLoading, error } = useGeoLocationQuery(searchTerm);
-  const { setWeatherData, setIsFetchingWeather, setAirPollutionData } = useCityWeatherContext();
+  const { setWeatherData, setIsFetchingWeather, setAirPollutionData, setForecastData } = useCityWeatherContext();
   const dynamicKey = Math.floor(Math.random() * max);
   
   const { refetch: weatherRefetch, isFetching: weatherIsFetching } = useWeatherByCoords({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
   const { refetch: airPollutionRefetch, isFetching: airPollutionIsFetching } = useAirPollution({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
+  const { refetch: forecastRefetch, isFetching: forecastIsFetching } = useForecastData({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
 
   useEffect(() => {
     async function fetchData() {
@@ -26,8 +27,9 @@ export const AutocompleteGeo: React.FC = () => {
         const makeRefetch = async () => {
           const resultWeather = await weatherRefetch();
           const resultAirPol = await airPollutionRefetch();
+          const resultForecast = await forecastRefetch();
 
-          if (weatherIsFetching || airPollutionIsFetching) {
+          if (weatherIsFetching || airPollutionIsFetching || forecastIsFetching) {
             setIsFetchingWeather(true);
           }
 
@@ -38,6 +40,11 @@ export const AutocompleteGeo: React.FC = () => {
 
           if (resultAirPol.data) {
             setAirPollutionData(resultAirPol.data);
+            setIsFetchingWeather(false);
+          }
+
+          if (resultForecast.data) {
+            setForecastData(resultForecast.data);
             setIsFetchingWeather(false);
           }
 

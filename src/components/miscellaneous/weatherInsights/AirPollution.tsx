@@ -52,7 +52,7 @@ export const AirPollution = () => {
             PM25
           </Typography>
           <Typography variant="h6" fontWeight={700}>
-            {Number(components.pm2_5).toPrecision(3)}
+            {components.pm2_5.toPrecision(3)}
           </Typography>
         </Grid2>
 
@@ -63,7 +63,7 @@ export const AirPollution = () => {
             SO2
           </Typography>
           <Typography variant="h6" fontWeight={700}>
-            {Number(components.so2).toPrecision(3)}
+            {components.so2.toPrecision(3)}
           </Typography>
         </Grid2>
 
@@ -74,7 +74,7 @@ export const AirPollution = () => {
             NO2
           </Typography>
           <Typography variant="h6" fontWeight={700}>
-            {Number(components.no2).toPrecision(3)}
+            {components.no2.toPrecision(3)}
           </Typography>
         </Grid2>
 
@@ -85,7 +85,7 @@ export const AirPollution = () => {
             O3
           </Typography>
           <Typography variant="h6" fontWeight={700}>
-            {Number(components.o3).toPrecision(3)}
+            {components.o3.toPrecision(3)}
           </Typography>
         </Grid2>
       </AirPollutionContentSection>

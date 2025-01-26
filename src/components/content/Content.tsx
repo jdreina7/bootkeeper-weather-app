@@ -6,6 +6,7 @@ import { useCityWeatherContext } from '../../context/cityWheather/CityWeatherCon
 import { NowWeatherSection } from '../miscellaneous/nowWeatherSection/NowWeatherSection';
 import { NO_CITY_SELECTED } from '../../utils/constants';
 import { WeatherHighlights } from '../miscellaneous/weatherInsights/WeatherHighlights';
+import { FiveDaysForecast } from '../miscellaneous/fiveDaysForecast/FiveDaysForecast';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -48,6 +49,9 @@ export const Content = () => {
           </Grid2>
           <Grid2 size={{ xs: 12, md: 8 }}>
             <WeatherHighlights />
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 4 }}>
+            <FiveDaysForecast />
           </Grid2>
         </MainGrid>
       )}

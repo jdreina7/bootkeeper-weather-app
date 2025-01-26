@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 
 import { CityDataType } from '../../utils/types';
-import { AirPollutionInterface, CityContextInterface, Coord, weatherDataInterface } from '../../utils/interfaces';
+import { AirPollutionInterface, CityContextInterface, Coord, ForecastInterface, weatherDataInterface } from '../../utils/interfaces';
 
 const CityWeatherContext = createContext<CityContextInterface | undefined>(undefined);
 
@@ -9,6 +9,7 @@ export const CityWeatherContextProvider: React.FC<{ children: React.ReactNode }>
   const [cityCoords, setCityCoords] = useState<CityDataType | null>(null);
   const [weatherData, setWeatherData] = useState<weatherDataInterface | null>(null);
   const [airPollutionData, setAirPollutionData] = useState<AirPollutionInterface | null>(null);
+  const [forecastData, setForecastData] = useState<ForecastInterface | null>(null);
   const [isFetchingWeather, setIsFetchingWeather] = useState<boolean | null>(null);
 
   const updateCityCoords = useCallback((coords: Coord) => {
@@ -25,7 +26,9 @@ export const CityWeatherContextProvider: React.FC<{ children: React.ReactNode }>
         isFetchingWeather,
         setIsFetchingWeather,
         airPollutionData,
-        setAirPollutionData
+        setAirPollutionData,
+        forecastData,
+        setForecastData
       }}
     >
       {children}

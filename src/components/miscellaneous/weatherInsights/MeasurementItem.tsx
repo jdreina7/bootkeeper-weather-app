@@ -21,6 +21,7 @@ const MeasurementContent = styled.div`
   flex-direction: row;
   width: 100%;
   align-items: center;
+  justify-content: space-around;
 `;
 
 export const MeasurementItem = (item: MeasurementInterface) => {
