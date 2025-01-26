@@ -2,8 +2,8 @@ import MyLocationIcon from '@mui/icons-material/MyLocation';
 import { Button } from '@mui/material';
 import styled from 'styled-components';
 
-import { useWeatherByCoords } from '../../api/querys';
-import { useCityWeatherContext } from '../../context/cityWheather/CityWeatherContext';
+import { useAirPollution, useWeatherByCoords } from '../../../api/querys';
+import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
 import { useEffect } from 'react';
 
 const LocationButton = styled(Button)`
@@ -12,8 +12,9 @@ const LocationButton = styled(Button)`
 `;
 
 export const CurrentLocationButton = () => {
-  const { cityCoords, setCityCoords, setWeatherData, setIsFetchingWeather } = useCityWeatherContext();
-  const { refetch, isFetching } = useWeatherByCoords({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 }!);
+  const { cityCoords, setCityCoords, setWeatherData, setIsFetchingWeather, setAirPollutionData } = useCityWeatherContext();
+  const { refetch: weatherRefetch, isFetching: weatherIsFetching } = useWeatherByCoords({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
+  const { refetch: airPollutionRefetch, isFetching: airPollutionIsFetching } = useAirPollution({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
 
   const handleGetCurrentLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -33,22 +34,30 @@ export const CurrentLocationButton = () => {
     async function fetchData() {
       if (cityCoords) {
         const makeRefetch = async () => {
-          const result = await refetch();
+          const resultWeather = await weatherRefetch();
+          const resultAirPol = await airPollutionRefetch();
 
-          if (isFetching) {
+          if (weatherIsFetching || airPollutionIsFetching) {
             setIsFetchingWeather(true);
           }
 
-          if (result.data) {
-            setWeatherData(result.data);
+          if (resultWeather.data) {
+            setWeatherData(resultWeather.data);
             setIsFetchingWeather(false);
           }
+
+          if (resultAirPol.data) {
+            setAirPollutionData(resultAirPol.data);
+            setIsFetchingWeather(false);
+          }
+
         };
 
         makeRefetch();
       }
     }
     fetchData();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cityCoords]);
 
   return (

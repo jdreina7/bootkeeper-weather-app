@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import styled from 'styled-components';
+import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
 
 import './index.css';
 
@@ -12,16 +13,13 @@ import { ThemeContext } from './context/theme/ThemeContext';
 const AppContainer = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  height: 100vh;
+  padding: 0 10px;
 `;
 
 const ContentWrapper = styled.main`
-  flex: 1;
   display: flex;
-  justify-content: center;
-  align-items: center;
 `;
-
 
 function App() {
   const { theme } = useContext(ThemeContext);
@@ -34,14 +32,16 @@ function App() {
 
   return (
       <ThemeProvider theme={appTheme}>
-        <AppContainer>
-          <CssBaseline />
-          <Header />
-          <ContentWrapper>
-            <Content />
-          </ContentWrapper>
-          <Footer />
-        </AppContainer>
+        <StyledComponentsThemeProvider theme={appTheme}>
+          <AppContainer>
+            <CssBaseline />
+            <Header />
+            <ContentWrapper>
+              <Content />
+            </ContentWrapper>
+            <Footer />
+          </AppContainer>
+        </StyledComponentsThemeProvider>
       </ThemeProvider>
   )
 }

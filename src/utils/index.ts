@@ -7,7 +7,7 @@ export const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug
  * @param {number} timezone Timezone shift from UTC in seconds
  * @returns {string} Date String. formate: "Sunday 10, Jan"
  */
-export const getTime = (dateUnix: number, timezone: number): string => {
+export const getDate = (dateUnix: number, timezone: number): string => {
   const date = new Date((dateUnix + timezone) * 1000);
   const weekDayName = weekDayNames[date.getUTCDay()];
   const monthName = monthNames[date.getUTCMonth()];
@@ -39,25 +39,55 @@ export const mps_to_kmh = (mps: number): number => {
   return mph / 1000;
 };
 
-export const aqiText = {
-    1: {
-        level: "Good",
-        message: "Air quality is considered satisfactory, and air pollution poses little or no risk"
-    },
-    2: {
-        level: "Fair",
-        message: "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution."
-    },
-    3: {
-        level: "Moderate",
-        message: "Members of sensitive groups may experience health effects. The general public is not likely to be affected."
-    },
-    4: {
-        level: "Unhealthy",
-        message: "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects."
-    },
-    5: {
-        level: "Hazardous",
-        message: "Health warnings of emergency conditions. The entire population is more likely to be affected."
-    }
+export const aqiOptions = [
+  {
+    id: 1,
+    color: '#088A4B',
+    level: 'Good',
+    message: 'Air quality is considered satisfactory, and air pollution poses little or no risk',
+  },
+  {
+    id: 2,
+    color: '#58D3F7',
+    level: 'Fair',
+    message:
+      'Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.',
+  },
+  {
+    id: 3,
+    color: '#AEB404',
+    level: 'Moderate',
+    message: 'Members of sensitive groups may experience health effects. The general public is not likely to be affected.',
+  },
+  {
+    id: 4,
+    color: '#FF8000',
+    level: 'Unhealthy',
+    message: 'Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.',
+  },
+  {
+    id: 5,
+    color: '#DF0101',
+    level: 'Hazardous',
+    message: 'Health warnings of emergency conditions. The entire population is more likely to be affected.',
+  },
+];
+
+/**
+ * @param str String to cast to camel case
+ * @returns Transformed string
+ */
+export const transformToCamelCase = (str: string): string => {
+  return str
+    .split(' ')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(' ');
+};
+
+/**
+ * @param kelvin Kelvin temperature
+ * @returns Celsius temperature
+ */
+export const kelvinToCelsius = (kelvin: number): number => {
+  return Math.round(kelvin - 273.15);
 };

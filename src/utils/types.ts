@@ -9,6 +9,7 @@ export type CityDataType = {
 };
 
 export type LocationOptionType = {
+  key?: string;
   name: string;
   country: string;
   state?: string;

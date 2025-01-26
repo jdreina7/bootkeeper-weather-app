@@ -1,19 +1,22 @@
-import { CityDataType } from "./types";
+import { CityDataType } from './types';
 
 export interface CityContextInterface {
   cityCoords: CityDataType | null;
-  setCityCoords: (data: CityDataType) => void;
+  setCityCoords: (coords: Coord) => void;
   weatherData: weatherDataInterface | null;
   setWeatherData: (data: weatherDataInterface) => void;
   isFetchingWeather: boolean | null;
   setIsFetchingWeather: (isFetching: boolean) => void;
+  airPollutionData: AirPollutionInterface | null;
+  setAirPollutionData: (data: AirPollutionInterface) => void;
 }
 
+// Weather interface
 export interface weatherDataInterface {
   coord: Coord;
   weather: Weather[];
   base: string;
-  main: Main;
+  main: WeatherMain;
   visibility: number;
   wind: Wind;
   rain: Rain;
@@ -35,7 +38,7 @@ export interface Coord {
   lat: number;
 }
 
-export interface Main {
+export interface WeatherMain {
   temp: number;
   feels_like: number;
   temp_min: number;
@@ -67,4 +70,34 @@ export interface Wind {
   speed: number;
   deg: number;
   gust: number;
+}
+
+// Air pollution interface
+export interface AirPollutionInterface {
+  coord: Coord;
+  list: List[];
+}
+
+export interface List {
+  main: AirPollutionMain;
+  components: { [key: string]: number };
+  dt: number;
+}
+
+export interface AirPollutionMain {
+  aqi: number;
+}
+
+export interface AqiDataInterface {
+  id: number;
+  color: string;
+  level: string;
+  message: string;
+}
+
+export interface MeasurementInterface {
+  title: string;
+  value: number;
+  icon: string;
+  unit_symbol?: string;
 }

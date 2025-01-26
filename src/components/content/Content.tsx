@@ -1,15 +1,17 @@
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Grid2 } from '@mui/material';
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
-import styled from "styled-components";
+import styled from 'styled-components';
 
-import { useCityWeatherContext } from "../../context/cityWheather/CityWeatherContext";
-import { NO_CITY_SELECTED } from "../../utils/constants";
-import { useEffect } from "react";
+import { useCityWeatherContext } from '../../context/cityWheather/CityWeatherContext';
+import { NowWeatherSection } from '../miscellaneous/nowWeatherSection/NowWeatherSection';
+import { NO_CITY_SELECTED } from '../../utils/constants';
+import { WeatherHighlights } from '../miscellaneous/weatherInsights/WeatherHighlights';
 
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: top;
+  width: 100%;
 
   .no-city-selected {
     display: flex;
@@ -20,13 +22,12 @@ const ContentContainer = styled.div`
   }
 `;
 
+const MainGrid = styled(Grid2)`
+  width: 100%;
+`;
+
 export const Content = () => {
   const { weatherData, isFetchingWeather } = useCityWeatherContext();
-
-  useEffect(() => {
-    console.log('27 weatherData >>> ', weatherData);
-    console.log('28 isFetchingWeather >>> ', isFetchingWeather);
-  }, [weatherData, isFetchingWeather]);
 
   return isFetchingWeather ? (
     <div className="loading">
@@ -41,11 +42,15 @@ export const Content = () => {
         </div>
       )}
       {weatherData && (
-        <>
-          <h2>Selected City</h2>
-          {JSON.stringify(weatherData)}
-        </>
+        <MainGrid container spacing={2}>
+          <Grid2 size={{ xs: 12, md: 4 }}>
+            <NowWeatherSection />
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 8 }}>
+            <WeatherHighlights />
+          </Grid2>
+        </MainGrid>
       )}
     </ContentContainer>
   );
-}
+};

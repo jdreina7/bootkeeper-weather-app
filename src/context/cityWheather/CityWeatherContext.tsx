@@ -1,24 +1,31 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useCallback, useContext, useState } from 'react';
 
 import { CityDataType } from '../../utils/types';
-import { CityContextInterface, weatherDataInterface } from '../../utils/interfaces';
+import { AirPollutionInterface, CityContextInterface, Coord, weatherDataInterface } from '../../utils/interfaces';
 
 const CityWeatherContext = createContext<CityContextInterface | undefined>(undefined);
 
 export const CityWeatherContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cityCoords, setCityCoords] = useState<CityDataType | null>(null);
   const [weatherData, setWeatherData] = useState<weatherDataInterface | null>(null);
+  const [airPollutionData, setAirPollutionData] = useState<AirPollutionInterface | null>(null);
   const [isFetchingWeather, setIsFetchingWeather] = useState<boolean | null>(null);
+
+  const updateCityCoords = useCallback((coords: Coord) => {
+    setCityCoords(coords);
+  }, []);
 
   return (
     <CityWeatherContext.Provider
       value={{
         cityCoords,
-        setCityCoords,
+        setCityCoords: updateCityCoords,
         weatherData,
         setWeatherData,
         isFetchingWeather,
-        setIsFetchingWeather
+        setIsFetchingWeather,
+        airPollutionData,
+        setAirPollutionData
       }}
     >
       {children}

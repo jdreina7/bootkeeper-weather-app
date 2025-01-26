@@ -3,10 +3,10 @@ import styled from 'styled-components';
 
 import logo from '../../assets/logo.png';
 
-import { CustomThemeSwitch } from '../customThemeSwitch/CustomThemeSwitch';
+import { CustomThemeSwitch } from '../miscellaneous/customThemeSwitch/CustomThemeSwitch';
 import { ThemeContext } from '../../context/theme/ThemeContext';
-import { CustomSearchField } from '../customSearchField/CustomSearchField';
-import { CurrentLocationButton } from '../currentLocationBtn/CurrentLocationButton';
+import { CustomSearchField } from '../miscellaneous/customSearchField/CustomSearchField';
+import { CurrentLocationButton } from '../miscellaneous/currentLocationBtn/CurrentLocationButton';
 import { Grid2 } from '@mui/material';
 
 const HeaderContainer = styled.header`
