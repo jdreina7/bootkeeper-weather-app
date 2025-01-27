@@ -10,18 +10,11 @@ import { CustomSearchField } from '../miscellaneous/customSearchField/CustomSear
 import { CurrentLocationButton } from '../miscellaneous/currentLocationBtn/CurrentLocationButton';
 import { THEME_LIGHT, THEME_DARK, APP_NAME } from '../../utils/constants';
 
-const HeaderContainer = styled.header`
-  display: flex;
-  flex-direction: row;
+const HeaderContainer = styled(Grid2)`
+  align-items: center;
   justify-content: space-between;
   padding: 1em;
   width: 100%;
-
-  .app-title {
-    font-size: 3em;
-    font-weight: bold;
-    margin-left: -0.8em;
-  }
 `;
 
 const HeaderSection = styled(Grid2)`
@@ -39,16 +32,21 @@ export const Header = () => {
   };
 
   return (
-    <Grid2 container spacing={2}>
+    <Grid2>
       <CustomThemeSwitch handleThemeChange={handleThemeChange} />
-      <HeaderContainer>
-        <HeaderSection size={4}>
+      <HeaderContainer
+        container
+        spacing={{ xs: 1, sm: 1, md: 2 }}
+        columns={{ xs: 12, sm: 12, md: 12 }}
+        direction={{ xs: 'column', md: 'row' }}
+      >
+        <HeaderSection size={{ xs: 12, sm: 4, md: 4 }} order={{ xs: 1, md: 1 }}>
           <img src={logo} alt={APP_NAME} width={'50%'} />
         </HeaderSection>
-        <HeaderSection size={4}>
+        <HeaderSection size={{ xs: 12, sm: 4, md: 4 }} order={{ xs: 3, md: 2 }}>
           <CustomSearchField />
         </HeaderSection>
-        <HeaderSection size={4}>
+        <HeaderSection size={{ xs: 12, sm: 4, md: 4 }} order={{ xs: 2, md: 3 }}>
           <CurrentLocationButton />
         </HeaderSection>
       </HeaderContainer>

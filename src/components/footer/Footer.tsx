@@ -15,18 +15,56 @@ const FooterContainer = styled.footer`
   width: 100%;
 `;
 
-const Section = styled.div`
+const SectionLeft = styled.div`
   align-items: center;
   display: flex;
   flex-direction: row;
+  font-size: 1em;
+
+  #septum-logo {
+    width: 15%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    p {
+      display: none;
+    }
+
+    #septum-logo {
+      width: 20%;
+    }
+  }
+`;
+
+const SectionRight = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  font-size: 1em;
+  justify-content: end;
+
+  #openweather-logo {
+    margin-bottom: 25px;
+    width: 20%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    p {
+      display: none;
+    }
+
+    #openweather-logo {
+      width: 30%;
+    }
+  }
 `;
 
 const PoweredBy = styled.p`
-  margin: 25px 10px 0px;
+  margin: 0px 10px 0px;
 `;
 
 const MadeIn = styled.p`
-  margin-right: 5px ;
+  margin-right: 5px;
 `;
 
 const Septum = styled.p`
@@ -36,19 +74,27 @@ const Septum = styled.p`
 export const Footer = () => {
   return (
     <FooterContainer>
-      <Section>
+      <SectionLeft>
         <MadeIn>{FOOTER_MADE}</MadeIn>
-        <FavoriteIcon  color='error' />
+        <FavoriteIcon
+          color="error"
+          sx={{
+            display: {
+              xs: 'none',
+              md: 'block',
+            },
+          }}
+        />
         <Septum>{FOOTER_IN}</Septum>
-        <a href="https://septum.com.co" target='blank'>
-          <img src={`/logoSeptum.png`} alt="Septum" width={70} />
+        <a href="https://septum.com.co" target="blank">
+          <img id="septum-logo" src={`/logoSeptum.png`} alt="Septum" />
         </a>
-      </Section>
+      </SectionLeft>
 
-      <Section>
+      <SectionRight>
         <PoweredBy>{FOOTER_POWERED}</PoweredBy>
-        <img src={`/openweatherlogo.png`} alt="openweather.org" width={100} />
-      </Section>
+        <img id="openweather-logo" src={`/openweatherlogo.png`} alt="openweather.org" />
+      </SectionRight>
     </FooterContainer>
   );
 };

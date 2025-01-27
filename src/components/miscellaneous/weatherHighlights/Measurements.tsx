@@ -15,7 +15,6 @@ import {
 const MeasurementsMainSection = styled(Grid2)`
   align-items: center;
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   width: 100%;
 `;
@@ -55,7 +54,12 @@ export const Measurements = () => {
   ];
 
   return (
-    <MeasurementsMainSection size={12}>
+    <MeasurementsMainSection
+      container
+      spacing={{ xs: 1, sm: 1, md: 2 }}
+      columns={{ xs: 12, sm: 12, md: 12 }}
+      direction={{ xs: 'column', md: 'row' }}
+    >
       {measurementsArray.map((item: MeasurementInterface) => (
         <MeasurementItem key={generateDynamicKey()} {...item} />
       ))}

@@ -16,6 +16,32 @@ const WeatherContainer = styled(Paper)`
   height: 100%;
   justify-content: space-evenly;
   width: 100%;
+
+  #location-section {
+      div {
+        width: 100% !important;
+      }
+    }
+
+  @media only screen and (max-width: 500px) {
+    #temperature-section {
+      h1 {
+        font-size: 2.5rem;
+      }
+    };
+
+    #location-section {
+      div {
+        font-size: 1rem;
+        width: 100%;
+      }
+    }
+    #date-section {
+      div {
+        font-size: 1rem;
+      }
+    }
+  }
 `;
 
 const NowWeatherFirstSection = styled.div`
@@ -47,7 +73,6 @@ const WeatherItem = styled.div`
   display: flex;
   font-size: 1.2em;
   margin: 10px;
-  width: 45%;
 `;
 
 export const NowWeatherSection = () => {
@@ -66,10 +91,10 @@ export const NowWeatherSection = () => {
   return (
     <WeatherContainer elevation={9} id="main-container-now-wether">
       <NowWeatherFirstSection>
-        <Section>
+        <Section id='title-section'>
           <WeatherNowTitle>{CONTENT_NOW_TITLE}</WeatherNowTitle>
         </Section>
-        <Section>
+        <Section id='temperature-section'>
           <WeatherTemp>{kelvinToCelsius(temp)}°C</WeatherTemp>
           <img
             src={`/weather_icons/${icon === '03d' || icon === '03n' ? '03dn' : icon}.svg`}
@@ -77,7 +102,7 @@ export const NowWeatherSection = () => {
             width={150}
           />
         </Section>
-        <Section>
+        <Section id='description-section'>
           <Typography variant="h5" gutterBottom>
             {transformToCamelCase(description)}
           </Typography>
@@ -86,13 +111,13 @@ export const NowWeatherSection = () => {
 
       <Divider variant="middle" flexItem />
 
-      <Section>
+      <Section id='location-section'>
         <WeatherItem color="textDisabled">
           <LocationOnIcon sx={{ fontSize: 25 }} />
           {name}, {country}
         </WeatherItem>
       </Section>
-      <Section>
+      <Section id='date-section'>
         <WeatherItem color="textDisabled">
           <EventAvailableIcon sx={{ fontSize: 25, marginRight: '5px' }} />
           {getDate(dateUnix, timezone)}

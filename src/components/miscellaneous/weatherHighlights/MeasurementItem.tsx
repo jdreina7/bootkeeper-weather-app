@@ -30,11 +30,11 @@ export const MeasurementItem = (item: MeasurementInterface) => {
   const { title, value, icon, unit_symbol } = item;
 
   return (
-    <MeasurementItemContainer size={3}>
+    <MeasurementItemContainer size={{ xs: 12, sm: 12, md: 3 }}>
       <MeasurementTitle>{title}</MeasurementTitle>
       <MeasurementContent>
         <img src={`/weather_icons/${icon}.svg`} alt={title} width={'35%'} />
-        <Typography fontWeight={700}>
+        <Typography sx={{ fontSize: { xs: '1.5rem', md: '1rem' } }} fontWeight={700}>
           {value} {unit_symbol ? unit_symbol : null}
         </Typography>
       </MeasurementContent>

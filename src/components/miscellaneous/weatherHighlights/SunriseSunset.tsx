@@ -34,6 +34,10 @@ const SunriseSunsetContentSection = styled(Grid2)`
   flex-direction: row;
   justify-content: space-around;
   width: 100%;
+
+  @media only screen and (max-width: 500px) {
+    width: 90% !important;
+  }
 `;
 
 const ContentSection = styled(Grid2)`
@@ -43,6 +47,16 @@ const ContentSection = styled(Grid2)`
   justify-content: space-between;
   text-align: center;
   width: 100%;
+
+  p {
+    font-size: 1.2rem;
+  }
+
+  @media only screen and (max-width: 500px) {
+    p {
+      font-size: 1.5rem;
+    }
+  }
 `;
 
 export const SunriseSunset = () => {
@@ -54,30 +68,30 @@ export const SunriseSunset = () => {
   } = weatherData as weatherDataInterface;
 
   return (
-    <SunriseSection size={6}>
+    <SunriseSection size={{ xs: 12, sm: 12, md: 6 }}>
       <SunriseSunsetHeaderSection>
         <h4>{CONTENT_SUNRISE_SUNSET_TITLE}</h4>
       </SunriseSunsetHeaderSection>
 
-      <SunriseSunsetContentSection container spacing={1} size={12}>
-        <ContentSection size={5} id="sunrise-content-section">
+      <SunriseSunsetContentSection container spacing={1} size={12} id='main-ceontent'>
+        <ContentSection size={{ xs: 12, sm: 12, md: 5 }} id="sunrise-content-section">
           <div>
             <img src={`/weather_icons/sunrise.svg`} alt="Sunrise" width={100} />
           </div>
           <div>
-            <Typography color="secundary">{CONTENT_SUNRISE_TITLE}</Typography>
+            <Typography>{CONTENT_SUNRISE_TITLE}</Typography>
             <Typography fontWeight={700}>{getHours(sunriseUnixUTC, timezone)}</Typography>
           </div>
         </ContentSection>
 
         <Divider orientation="vertical" variant="middle" flexItem />
 
-        <ContentSection size={5} id="sunset-content-section">
+        <ContentSection size={{ xs: 12, sm: 12, md: 5 }} id="sunset-content-section">
           <div>
             <img src={`/weather_icons/sunset.svg`} alt="Sunrise" width={100} />
           </div>
           <div>
-            <Typography color="secundary">{CONTENT_SUNSET_TITLE}</Typography>
+            <Typography>{CONTENT_SUNSET_TITLE}</Typography>
             <Typography fontWeight={700}>{getHours(sunsetUnixUTC, timezone)}</Typography>
           </div>
         </ContentSection>

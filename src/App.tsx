@@ -21,6 +21,10 @@ const ContentWrapper = styled.main`
   align-items: center;
   display: flex;
   padding: 0px 20px;
+
+  @media only screen and (max-width: 500px) {
+    padding: 0px 10px !important;
+  }
 `;
 
 function App() {

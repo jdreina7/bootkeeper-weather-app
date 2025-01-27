@@ -25,6 +25,10 @@ const TitleSection = styled.section`
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+
+  span {
+    text-align: end;
+  }
 `;
 
 const HighlightsTitle = styled.h2`
@@ -88,7 +92,7 @@ export const WeatherHighlights = () => {
           {getHours(dateUnix, timezone)} in {name}, {country}
         </span>
       </TitleSection>
-      <Grid2 container spacing={1}>
+      <Grid2 container spacing={1} columns={{ xs: 12, sm: 12, md: 12 }} direction={{ xs: 'column', md: 'row' }}>
         <AirPollution />
         <SunriseSunset />
         <Measurements />

@@ -34,7 +34,8 @@ const AirPollutionContentSection = styled(Grid2)`
   align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between !important;
+  text-align: center;
   width: 100%;
 `;
 
@@ -44,15 +45,15 @@ export const AirPollution = () => {
   const { list } = airPollutionData as AirPollutionInterface;
   const { main, components } = list[0];
   return (
-    <AirPollutionSection size={6} id="air-pollution-section">
+    <AirPollutionSection size={{ xs: 12, sm: 12, md: 6 }} id="air-pollution-section">
       <AirPollutionHeaderSection>
         <h4>{CONTENT_AIR_QUALITY_INDEX}</h4>
         <AirQualityIndicator aqi={main.aqi} />
       </AirPollutionHeaderSection>
 
       <AirPollutionContentSection container spacing={1} size={12}>
-        <Grid2 size={2}>
-          <img src={`/weather_icons/wind.svg`} alt="Wind" width={70} />
+        <Grid2 size={{ xs: 12, sm: 12, md: 2 }}>
+          <img src={`/weather_icons/wind.svg`} alt="Wind" width={70}/>
         </Grid2>
 
         <Grid2 size={2} textAlign={'center'}>

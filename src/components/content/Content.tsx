@@ -14,7 +14,7 @@ const ContentContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: 100px;
+  margin-bottom: 130px;
 
   .no-city-selected {
     display: flex;
@@ -27,6 +27,12 @@ const ContentContainer = styled.div`
 
 const NoContent = styled.div`
   margin-top: 100px;
+  font-size: 2em;
+  text-align: center;
+
+  @media only screen and (max-width: 500px) {
+    margin-top: 0px;
+  }
 `;
 
 const MainGrid = styled(Grid2)`
@@ -44,8 +50,8 @@ export const Content = () => {
     <ContentContainer>
       {!weatherData && (
         <NoContent className="no-city-selected">
-          <NotListedLocationIcon sx={{ fontSize: 150 }} />
-          <h1>{NO_CITY_SELECTED}</h1>
+          <NotListedLocationIcon sx={{ fontSize: 100 }}/>
+          <p>{NO_CITY_SELECTED}</p>
         </NoContent>
       )}
       {weatherData && (
