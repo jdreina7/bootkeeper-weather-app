@@ -135,6 +135,17 @@ export interface ForecastListItemToShow {
   date: Date;
   temp_max: number;
 }
+export interface ForecastDailyListItemToShow {
+  icon: string;
+  description: string;
+  date: Date;
+  temp_max: number;
+  dateTimeUnix: number;
+  temp: number;
+  windDirection: number;
+  windSpeed: number;
+  timezone: number;
+}
 
 export interface Clouds {
   all: number;

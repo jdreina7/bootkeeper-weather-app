@@ -33,7 +33,7 @@ export const getHours = function (timeUnix: number, timezone: number): string {
  * @param {number} mps Metter per seconds
  * @returns {number} Kilometer per hours
  */
-export const mps_to_kmh = (mps: number): number => {
+export const mpsToKmh = (mps: number): number => {
   const mph = mps * 3600;
 
   return mph / 1000;
@@ -91,3 +91,9 @@ export const transformToCamelCase = (str: string): string => {
 export const kelvinToCelsius = (kelvin: number): number => {
   return Math.round(kelvin - 273.15);
 };
+
+export const generateDynamicKey = (): string => {
+  const dynamicKey = Math.floor(Math.random() * 999999999);
+
+  return `${dynamicKey} - ${Date.now()}`
+}

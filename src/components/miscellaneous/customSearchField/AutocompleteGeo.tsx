@@ -6,8 +6,7 @@ import WhereToVoteIcon from '@mui/icons-material/WhereToVote';
 import { LocationOptionType } from "../../../utils/types";
 import { useCityWeatherContext } from "../../../context/cityWheather/CityWeatherContext";
 import { Coord } from "../../../utils/interfaces";
-
-const max = 1000000000;
+import { generateDynamicKey } from "../../../utils";
 
 export const AutocompleteGeo: React.FC = () => {
   const [value, setValue] = useState<LocationOptionType | null>(null);
@@ -15,7 +14,6 @@ export const AutocompleteGeo: React.FC = () => {
   const [cityCoords, setCityCoords] = useState<Coord>()
   const { data, isLoading, error } = useGeoLocationQuery(searchTerm);
   const { setWeatherData, setIsFetchingWeather, setAirPollutionData, setForecastData } = useCityWeatherContext();
-  const dynamicKey = Math.floor(Math.random() * max);
   
   const { refetch: weatherRefetch, isFetching: weatherIsFetching } = useWeatherByCoords({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
   const { refetch: airPollutionRefetch, isFetching: airPollutionIsFetching } = useAirPollution({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
@@ -59,7 +57,7 @@ export const AutocompleteGeo: React.FC = () => {
   }, [cityCoords]);
 
   const options = data?.map((location: LocationOptionType) => ({
-    key: `${dynamicKey}-${location.lat}-${location.lon}`,
+    key: generateDynamicKey(),
     name: location.name,
     country: location.country,
     state: location.state,

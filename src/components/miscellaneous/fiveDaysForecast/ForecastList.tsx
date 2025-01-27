@@ -2,7 +2,7 @@ import { Typography } from '@mui/material';
 import styled from 'styled-components';
 
 import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
-import { kelvinToCelsius, monthNames, weekDayNames } from '../../../utils';
+import { generateDynamicKey, kelvinToCelsius, monthNames, weekDayNames } from '../../../utils';
 import { useEffect, useState } from 'react';
 import { ForecastListItemToShow } from '../../../utils/interfaces';
 
@@ -48,6 +48,7 @@ export const ForecastList = () => {
         } = forecastData.list[i];
         const [{ icon, description }] = weather;
         const date = new Date(dt_txt);
+
         forecastItems.push({ temp_max, icon, description, date });
       }
 
@@ -55,13 +56,11 @@ export const ForecastList = () => {
     }
   }, [forecastData]);
 
-  console.log('28 forecastItems >>> ', listData);
-
   return listData ? (
     <ForecastListContentSection>
       {listData.map((item) => {
         return (
-          <ListItem>
+          <ListItem key={generateDynamicKey()}>
             <ItemIconDiv>
               <img
                 src={`/weather_icons/${item.icon === '03d' || item.icon === '03n' ? '03dn' : item.icon}.svg`}

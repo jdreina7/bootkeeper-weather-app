@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
 import { MeasurementInterface, weatherDataInterface } from '../../../utils/interfaces';
 import { MeasurementItem } from './MeasurementItem';
+import { generateDynamicKey } from '../../../utils';
 
 const MeasurementsMainSection = styled(Grid2)`
   display: flex;
@@ -48,9 +49,9 @@ export const Measurements = () => {
   ]
 
   return (
-    <MeasurementsMainSection size={12} spacing={1}>
+    <MeasurementsMainSection size={12}>
         {measurementsArray.map((item: MeasurementInterface) => (
-            <MeasurementItem {...item} />
+            <MeasurementItem key={generateDynamicKey()} {...item} />
         ))}
     </MeasurementsMainSection>
   );

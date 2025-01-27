@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import { useCityWeatherContext } from '../../context/cityWheather/CityWeatherContext';
 import { NowWeatherSection } from '../miscellaneous/nowWeatherSection/NowWeatherSection';
 import { NO_CITY_SELECTED } from '../../utils/constants';
-import { WeatherHighlights } from '../miscellaneous/weatherInsights/WeatherHighlights';
+import { WeatherHighlights } from '../miscellaneous/weatherHighlights/WeatherHighlights';
 import { FiveDaysForecast } from '../miscellaneous/fiveDaysForecast/FiveDaysForecast';
+import { DailyForecast } from '../miscellaneous/dailyForecast/DailyForecast';
 
 const ContentContainer = styled.div`
   display: flex;
@@ -52,6 +53,9 @@ export const Content = () => {
           </Grid2>
           <Grid2 size={{ xs: 12, md: 4 }}>
             <FiveDaysForecast />
+          </Grid2>
+          <Grid2 size={{ xs: 12, md: 8 }}>
+            <DailyForecast />
           </Grid2>
         </MainGrid>
       )}
