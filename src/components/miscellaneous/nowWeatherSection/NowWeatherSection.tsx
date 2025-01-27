@@ -8,11 +8,13 @@ import { getDate, kelvinToCelsius, transformToCamelCase } from '../../../utils';
 import { weatherDataInterface } from '../../../utils/interfaces';
 
 const WeatherContainer = styled(Paper)`
+  align-items: center;
+  border-radius: 20px !important;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  height: 100%;
+  justify-content: space-evenly;
   width: 100%;
-  border-radius: 20px !important;
 `;
 
 const NowWeatherFirstSection = styled.div`
@@ -61,7 +63,7 @@ export const NowWeatherSection = () => {
   const [{ description, icon }] = weather;
 
   return (
-    <WeatherContainer elevation={9}>
+    <WeatherContainer elevation={9} id='main-container-now-wether'>
       <NowWeatherFirstSection>
         <Section>
             <WeatherNowTitle>Now</WeatherNowTitle>

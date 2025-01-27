@@ -4,6 +4,8 @@ import Switch from '@mui/material/Switch';
 import { ThemeContext } from '../../../context/theme/ThemeContext';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
+  position: 'absolute',
+  right: '1%',
   width: 62,
   height: 34,
   padding: 7,

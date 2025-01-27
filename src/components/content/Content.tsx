@@ -12,8 +12,9 @@ import { DailyForecast } from '../miscellaneous/dailyForecast/DailyForecast';
 const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: top;
+  align-items: center;
   width: 100%;
+  margin-bottom: 100px;
 
   .no-city-selected {
     display: flex;
@@ -45,16 +46,16 @@ export const Content = () => {
       )}
       {weatherData && (
         <MainGrid container spacing={2}>
-          <Grid2 size={{ xs: 12, md: 4 }}>
+          <Grid2 size={{ xs: 12, md: 3 }}>
             <NowWeatherSection />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 8 }}>
+          <Grid2 size={{ xs: 12, md: 9 }}>
             <WeatherHighlights />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 4 }}>
+          <Grid2 size={{ xs: 12, md: 3 }}>
             <FiveDaysForecast />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 8 }}>
+          <Grid2 size={{ xs: 12, md: 9 }}>
             <DailyForecast />
           </Grid2>
         </MainGrid>

@@ -18,6 +18,7 @@ const AppContainer = styled.div`
 `;
 
 const ContentWrapper = styled.main`
+  align-items: center;
   display: flex;
 `;
 
@@ -33,14 +34,14 @@ function App() {
   return (
       <ThemeProvider theme={appTheme}>
         <StyledComponentsThemeProvider theme={appTheme}>
-          <AppContainer>
+          <AppContainer id='main-app-container'>
             <CssBaseline />
             <Header />
             <ContentWrapper>
               <Content />
             </ContentWrapper>
-            <Footer />
           </AppContainer>
+          <Footer />
         </StyledComponentsThemeProvider>
       </ThemeProvider>
   )

@@ -71,10 +71,8 @@ export const ForecastList = () => {
             </ItemIconDiv>
 
             <ContentText>
-              {item.date.getDate()} {monthNames[item.date.getUTCMonth()]}
+              {weekDayNames[item.date.getUTCDay()]}, {item.date.getDate()} {monthNames[item.date.getUTCMonth()]}
             </ContentText>
-
-            <ContentText>{weekDayNames[item.date.getUTCDay()]}</ContentText>
           </ListItem>
         );
       })}

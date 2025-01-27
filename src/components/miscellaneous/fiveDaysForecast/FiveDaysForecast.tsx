@@ -10,6 +10,7 @@ const WeatherContainer = styled(Paper)`
   width: 100%;
   border-radius: 20px !important;
   padding: 10px 20px;
+  height: 100%;
 `;
 
 const ForecastTitleSection = styled.section`

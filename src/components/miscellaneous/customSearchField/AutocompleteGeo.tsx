@@ -1,23 +1,32 @@
-import React, { useEffect, useState } from "react";
-import { TextField, Autocomplete, Box, CircularProgress } from "@mui/material";
-
-import { useAirPollution, useForecastData, useGeoLocationQuery, useWeatherByCoords } from "../../../api/querys";
+import React, { useEffect, useState } from 'react';
+import { TextField, Autocomplete, Box, CircularProgress } from '@mui/material';
 import WhereToVoteIcon from '@mui/icons-material/WhereToVote';
-import { LocationOptionType } from "../../../utils/types";
-import { useCityWeatherContext } from "../../../context/cityWheather/CityWeatherContext";
-import { Coord } from "../../../utils/interfaces";
-import { generateDynamicKey } from "../../../utils";
+
+import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
+import { useAirPollution, useForecastData, useGeoLocationQuery, useWeatherByCoords } from '../../../api/querys';
+import { LocationOptionType } from '../../../utils/types';
+import { Coord } from '../../../utils/interfaces';
+import { generateDynamicKey } from '../../../utils';
 
 export const AutocompleteGeo: React.FC = () => {
   const [value, setValue] = useState<LocationOptionType | null>(null);
-  const [searchTerm, setSearchTerm] = useState<string>("");
-  const [cityCoords, setCityCoords] = useState<Coord>()
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [cityCoords, setCityCoords] = useState<Coord>();
   const { data, isLoading, error } = useGeoLocationQuery(searchTerm);
   const { setWeatherData, setIsFetchingWeather, setAirPollutionData, setForecastData } = useCityWeatherContext();
-  
-  const { refetch: weatherRefetch, isFetching: weatherIsFetching } = useWeatherByCoords({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
-  const { refetch: airPollutionRefetch, isFetching: airPollutionIsFetching } = useAirPollution({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
-  const { refetch: forecastRefetch, isFetching: forecastIsFetching } = useForecastData({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
+
+  const { refetch: weatherRefetch, isFetching: weatherIsFetching } = useWeatherByCoords({
+    lat: cityCoords?.lat || 0,
+    lon: cityCoords?.lon || 0,
+  });
+  const { refetch: airPollutionRefetch, isFetching: airPollutionIsFetching } = useAirPollution({
+    lat: cityCoords?.lat || 0,
+    lon: cityCoords?.lon || 0,
+  });
+  const { refetch: forecastRefetch, isFetching: forecastIsFetching } = useForecastData({
+    lat: cityCoords?.lat || 0,
+    lon: cityCoords?.lon || 0,
+  });
 
   useEffect(() => {
     async function fetchData() {
@@ -45,15 +54,14 @@ export const AutocompleteGeo: React.FC = () => {
             setForecastData(resultForecast.data);
             setIsFetchingWeather(false);
           }
-
         };
 
         makeRefetch();
-        setValue(null)
+        setValue(null);
       }
     }
     fetchData();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cityCoords]);
 
   const options = data?.map((location: LocationOptionType) => ({
@@ -62,7 +70,7 @@ export const AutocompleteGeo: React.FC = () => {
     country: location.country,
     state: location.state,
     local_names: location.local_names,
-    lat : location.lat,
+    lat: location.lat,
     lon: location.lon,
   }));
 
@@ -72,7 +80,7 @@ export const AutocompleteGeo: React.FC = () => {
       id="autocomplete-geo-location"
       options={options || []}
       getOptionLabel={(option: LocationOptionType) =>
-        `${option.name}${option.state ? `, ${option.state}` : ""}, ${option.country}`
+        `${option.name}${option.state ? `, ${option.state}` : ''}, ${option.country}`
       }
       fullWidth
       loading={isLoading}
@@ -86,8 +94,8 @@ export const AutocompleteGeo: React.FC = () => {
         const { ...otherProps } = props;
         return (
           <Box component="li" {...otherProps} key={option.key}>
-            <WhereToVoteIcon sx={{ marginRight: 1, color: "primary.main" }} />
-            {`${option.name}${option.state ? `, ${option.state}` : ""}, ${option.country}`}
+            <WhereToVoteIcon sx={{ marginRight: 1, color: 'primary.main' }} />
+            {`${option.name}${option.state ? `, ${option.state}` : ''}, ${option.country}`}
           </Box>
         );
       }}

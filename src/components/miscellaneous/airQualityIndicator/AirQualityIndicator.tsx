@@ -12,7 +12,7 @@ export const AirQualityIndicator = ({ aqi }: AirPollutionMain) => {
   const { level, message, color } = aqidata[0];
 
   return (
-    <Tooltip title={message} enterDelay={500} leaveDelay={200} placement='top-end'>
+    <Tooltip title={message} enterDelay={500} leaveDelay={200} placement="top-end">
       <Chip size="medium" label={level} style={{ backgroundColor: color, cursor: 'help' }} />
     </Tooltip>
   );

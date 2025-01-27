@@ -1,8 +1,8 @@
-import { Divider, Grid2, Tooltip, Typography } from '@mui/material';
+import { Grid2, Tooltip, Typography } from '@mui/material';
 
 import styled from 'styled-components';
 import { ForecastDailyListItemToShow } from '../../../utils/interfaces';
-import { getHours, mpsToKmh } from '../../../utils';
+import { getHours, mpsToKmh, transformToCamelCase } from '../../../utils';
 
 const CardContainer = styled(Grid2)`
   display: flex;
@@ -34,20 +34,25 @@ export const DailyForecastCard = (item: ForecastDailyListItemToShow) => {
     <CardContainer>
       <CardTitle>{getHours(dateTimeUnix, timezone)}</CardTitle>
       <CardContent>
-        <img src={`/weather_icons/${icon === '03d' || icon === '03n' ? '03dn' : icon}.svg`} alt={description} width={'50%'} />
-        <Typography fontWeight={700}>
-          {temp}°
-        </Typography>
-
-        <Divider variant="middle" flexItem />
+        <Tooltip title={transformToCamelCase(description)} placement="top-end">
+          <img
+            src={`/weather_icons/${icon === '03d' || icon === '03n' ? '03dn' : icon}.svg`}
+            alt={description}
+            width={'30%'}
+          />
+        </Tooltip>
+        <Typography fontWeight={700}>{temp}°</Typography>
 
         <Tooltip title={`Wind direction: ${windDirection - 180}°`} placement="top-end">
-            <img src={`/weather_icons/direction.png`} alt={description} width={'30%'} style={{transform: `rotate(${windDirection - 180}deg)`}}/>
+          <img
+            src={`/weather_icons/direction.png`}
+            alt={description}
+            width={'15%'}
+            style={{ transform: `rotate(${windDirection - 180}deg)`, cursor: 'help', margin: '20px auto'}}
+          />
         </Tooltip>
 
-        <Typography fontWeight={700}>
-          {mpsToKmh(windSpeed).toPrecision(2)} km/h
-        </Typography>
+        <Typography fontWeight={700}>{mpsToKmh(windSpeed).toPrecision(2)} km/h</Typography>
       </CardContent>
     </CardContainer>
   );

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { Grid2 } from '@mui/material';
 import styled from 'styled-components';
 
 import logo from '../../assets/logo.png';
@@ -7,12 +8,12 @@ import { CustomThemeSwitch } from '../miscellaneous/customThemeSwitch/CustomThem
 import { ThemeContext } from '../../context/theme/ThemeContext';
 import { CustomSearchField } from '../miscellaneous/customSearchField/CustomSearchField';
 import { CurrentLocationButton } from '../miscellaneous/currentLocationBtn/CurrentLocationButton';
-import { Grid2 } from '@mui/material';
+import { THEME_LIGHT, THEME_DARK, APP_NAME } from '../../utils/constants';
 
 const HeaderContainer = styled.header`
   display: flex;
-  justify-content: space-between;
   flex-direction: row;
+  justify-content: space-between;
   padding: 1em;
   width: 100%;
 
@@ -23,27 +24,9 @@ const HeaderContainer = styled.header`
   }
 `;
 
-const HeaderSwitchThemeSection = styled(Grid2)`
-  display: flex;
-  width: 100%;
-  justify-content: flex-end;
-`;
-
-const HeaderLogoSection = styled(Grid2)`
-  display: flex;
-  align-items: top;
-  justify-content: center;
-`;
-
-const HeaderSearchSection = styled(Grid2)`
-  display: flex;
-  align-items: top;
-  justify-content: center;
-`;
-
-const HeaderCurrentLocation = styled(Grid2)`
-  display: flex;
+const HeaderSection = styled(Grid2)`
   align-items: center;
+  display: flex;
   justify-content: center;
 `;
 
@@ -51,24 +34,23 @@ export const Header = () => {
   const { theme, setTheme } = useContext(ThemeContext);
 
   const handleThemeChange = () => {
-    const newTheme = theme === 'Light' ? 'Dark' : 'Light';
+    const newTheme = theme === THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
     setTheme(newTheme);
   };
+
   return (
     <Grid2 container spacing={2}>
-      <HeaderSwitchThemeSection size={12}>
-        <CustomThemeSwitch handleThemeChange={handleThemeChange} />
-      </HeaderSwitchThemeSection>
+      <CustomThemeSwitch handleThemeChange={handleThemeChange} />
       <HeaderContainer>
-        <HeaderLogoSection size={4}>
-          <img src={logo} alt="Instant Weather" width={'50%'} />
-        </HeaderLogoSection>
-        <HeaderSearchSection size={4}>
+        <HeaderSection size={4}>
+          <img src={logo} alt={APP_NAME} width={'50%'} />
+        </HeaderSection>
+        <HeaderSection size={4}>
           <CustomSearchField />
-        </HeaderSearchSection>
-        <HeaderCurrentLocation size={4}>
+        </HeaderSection>
+        <HeaderSection size={4}>
           <CurrentLocationButton />
-        </HeaderCurrentLocation>
+        </HeaderSection>
       </HeaderContainer>
     </Grid2>
   );
