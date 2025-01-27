@@ -25,6 +25,10 @@ const ContentContainer = styled.div`
   }
 `;
 
+const NoContent = styled.div`
+  margin-top: 100px;
+`;
+
 const MainGrid = styled(Grid2)`
   width: 100%;
 `;
@@ -39,10 +43,10 @@ export const Content = () => {
   ) : (
     <ContentContainer>
       {!weatherData && (
-        <div className="no-city-selected">
-          <NotListedLocationIcon sx={{ fontSize: 200 }} />
+        <NoContent className="no-city-selected">
+          <NotListedLocationIcon sx={{ fontSize: 150 }} />
           <h1>{NO_CITY_SELECTED}</h1>
-        </div>
+        </NoContent>
       )}
       {weatherData && (
         <MainGrid container spacing={2}>

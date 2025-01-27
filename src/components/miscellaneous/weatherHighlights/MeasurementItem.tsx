@@ -1,14 +1,16 @@
 import { Grid2, Typography } from '@mui/material';
 import styled from 'styled-components';
+
 import { MeasurementInterface } from '../../../utils/interfaces';
+import { THEME_DARK } from '../../../utils/constants';
 
 const MeasurementItemContainer = styled(Grid2)`
+  background-color: ${({ theme }) => (theme.palette.mode === THEME_DARK.toLocaleLowerCase() ? '#575757' : '#f2f2f2')};
+  border-radius: 20px !important;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: ${({ theme }) => (theme.palette.mode === 'dark' ? '#575757' : '#f2f2f2')};
   padding: 10px 20px;
-  border-radius: 20px !important;
+  width: 100%;
 `;
 
 const MeasurementTitle = styled.h6`
@@ -17,11 +19,11 @@ const MeasurementTitle = styled.h6`
 `;
 
 const MeasurementContent = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  width: 100%;
-  align-items: center;
   justify-content: space-around;
+  width: 100%;
 `;
 
 export const MeasurementItem = (item: MeasurementInterface) => {
@@ -31,7 +33,7 @@ export const MeasurementItem = (item: MeasurementInterface) => {
     <MeasurementItemContainer size={3}>
       <MeasurementTitle>{title}</MeasurementTitle>
       <MeasurementContent>
-        <img src={`/weather_icons/${icon}.svg`} alt="Humidity" width={'50%'} />
+        <img src={`/weather_icons/${icon}.svg`} alt={title} width={'35%'} />
         <Typography fontWeight={700}>
           {value} {unit_symbol ? unit_symbol : null}
         </Typography>

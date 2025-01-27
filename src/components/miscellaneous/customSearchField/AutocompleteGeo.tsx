@@ -7,6 +7,7 @@ import { useAirPollution, useForecastData, useGeoLocationQuery, useWeatherByCoor
 import { LocationOptionType } from '../../../utils/types';
 import { Coord } from '../../../utils/interfaces';
 import { generateDynamicKey } from '../../../utils';
+import { HEADER_AUTOCOMPLETE_LABEL } from '../../../utils/constants';
 
 export const AutocompleteGeo: React.FC = () => {
   const [value, setValue] = useState<LocationOptionType | null>(null);
@@ -102,7 +103,7 @@ export const AutocompleteGeo: React.FC = () => {
       renderInput={(params) => (
         <TextField
           {...params}
-          label="Search City"
+          label={HEADER_AUTOCOMPLETE_LABEL}
           variant="outlined"
           slotProps={{
             input: {

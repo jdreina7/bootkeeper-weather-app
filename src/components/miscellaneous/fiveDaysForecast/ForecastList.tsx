@@ -1,35 +1,35 @@
+import { useEffect, useState } from 'react';
 import { Typography } from '@mui/material';
 import styled from 'styled-components';
 
 import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
 import { generateDynamicKey, kelvinToCelsius, monthNames, weekDayNames } from '../../../utils';
-import { useEffect, useState } from 'react';
 import { ForecastListItemToShow } from '../../../utils/interfaces';
 
 const ForecastListContentSection = styled.section`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 100%;
 `;
 
 const ListItem = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
 
 const ItemIconDiv = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
 `;
 
 const ContentText = styled.p`
-  font-size: 1em;
   color: ${({ theme }) => theme.palette.text.secondary};
+  font-size: 1em;
   text-align: center;
 `;
 

@@ -5,12 +5,18 @@ import { useCityWeatherContext } from '../../../context/cityWheather/CityWeather
 import { MeasurementInterface, weatherDataInterface } from '../../../utils/interfaces';
 import { MeasurementItem } from './MeasurementItem';
 import { generateDynamicKey } from '../../../utils';
+import {
+  UNIT_HUMIDITY_TITLE,
+  UNIT_PRESSURE_TITLE,
+  UNIT_VISIBILITY_TITLE,
+  UNIT_FEELS_LIKE_TITLE,
+} from '../../../utils/constants';
 
 const MeasurementsMainSection = styled(Grid2)`
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
 `;
 
@@ -23,36 +29,36 @@ export const Measurements = () => {
 
   const measurementsArray: MeasurementInterface[] = [
     {
-        title: 'Humidity',
-        value: humidity,
-        icon: 'humidity',
-        unit_symbol: '%'
+      title: UNIT_HUMIDITY_TITLE,
+      value: humidity,
+      icon: 'humidity',
+      unit_symbol: '%',
     },
     {
-        title: 'Pressure',
-        value: pressure,
-        icon: 'barometer',
-        unit_symbol: 'hPa'
+      title: UNIT_PRESSURE_TITLE,
+      value: pressure,
+      icon: 'barometer',
+      unit_symbol: 'hPa',
     },
     {
-        title: 'Visibility',
-        value: visibility / 1000,
-        icon: 'visibility',
-        unit_symbol: '%'
+      title: UNIT_VISIBILITY_TITLE,
+      value: visibility / 1000,
+      icon: 'visibility',
+      unit_symbol: '%',
     },
     {
-        title: 'Feels Like',
-        value: feels_like,
-        icon: 'feels_like',
-        unit_symbol: '°C'
+      title: UNIT_FEELS_LIKE_TITLE,
+      value: feels_like,
+      icon: 'feels_like',
+      unit_symbol: '°C',
     },
-  ]
+  ];
 
   return (
     <MeasurementsMainSection size={12}>
-        {measurementsArray.map((item: MeasurementInterface) => (
-            <MeasurementItem key={generateDynamicKey()} {...item} />
-        ))}
+      {measurementsArray.map((item: MeasurementInterface) => (
+        <MeasurementItem key={generateDynamicKey()} {...item} />
+      ))}
     </MeasurementsMainSection>
   );
 };

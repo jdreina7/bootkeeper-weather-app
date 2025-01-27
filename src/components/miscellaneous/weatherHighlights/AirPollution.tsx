@@ -4,29 +4,37 @@ import styled from 'styled-components';
 import { AirQualityIndicator } from '../airQualityIndicator/AirQualityIndicator';
 import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
 import { AirPollutionInterface } from '../../../utils/interfaces';
+import {
+  CONTENT_AIR_QUALITY_INDEX,
+  THEME_DARK,
+  UNIT_NO2,
+  UNIT_O3,
+  UNIT_PM25,
+  UNIT_SO2,
+} from '../../../utils/constants';
 
 const AirPollutionSection = styled(Grid2)`
+  background-color: ${({ theme }) => (theme.palette.mode === THEME_DARK.toLocaleLowerCase() ? '#575757' : '#f2f2f2')};
+  border-radius: 20px !important;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: ${({ theme }) => (theme.palette.mode === 'dark' ? '#575757' : '#f2f2f2')};
   padding: 10px 20px;
-  border-radius: 20px !important;
+  width: 100%;
 `;
 
 const AirPollutionHeaderSection = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
 `;
 
 const AirPollutionContentSection = styled(Grid2)`
+  align-items: center;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
   width: 100%;
 `;
 
@@ -38,19 +46,17 @@ export const AirPollution = () => {
   return (
     <AirPollutionSection size={6} id="air-pollution-section">
       <AirPollutionHeaderSection>
-        <h4>Air Quality Index</h4>
+        <h4>{CONTENT_AIR_QUALITY_INDEX}</h4>
         <AirQualityIndicator aqi={main.aqi} />
       </AirPollutionHeaderSection>
 
       <AirPollutionContentSection container spacing={1} size={12}>
         <Grid2 size={2}>
-          <img src={`/weather_icons/wind.svg`} alt="Wind" width={60} />
+          <img src={`/weather_icons/wind.svg`} alt="Wind" width={70} />
         </Grid2>
 
         <Grid2 size={2} textAlign={'center'}>
-          <Typography color="secundary">
-            PM25
-          </Typography>
+          <Typography color="secundary">{UNIT_PM25}</Typography>
           <Typography variant="h6" fontWeight={700}>
             {components.pm2_5.toPrecision(3)}
           </Typography>
@@ -59,9 +65,7 @@ export const AirPollution = () => {
         <Divider orientation="vertical" variant="middle" flexItem />
 
         <Grid2 size={2} textAlign={'center'}>
-          <Typography color="secundary">
-            SO2
-          </Typography>
+          <Typography color="secundary">{UNIT_SO2}</Typography>
           <Typography variant="h6" fontWeight={700}>
             {components.so2.toPrecision(3)}
           </Typography>
@@ -70,9 +74,7 @@ export const AirPollution = () => {
         <Divider orientation="vertical" variant="middle" flexItem />
 
         <Grid2 size={2} textAlign={'center'}>
-          <Typography color="secundary">
-            NO2
-          </Typography>
+          <Typography color="secundary">{UNIT_NO2}</Typography>
           <Typography variant="h6" fontWeight={700}>
             {components.no2.toPrecision(3)}
           </Typography>
@@ -81,9 +83,7 @@ export const AirPollution = () => {
         <Divider orientation="vertical" variant="middle" flexItem />
 
         <Grid2 size={2} textAlign={'center'}>
-          <Typography color="secundary">
-            O3
-          </Typography>
+          <Typography color="secundary">{UNIT_O3}</Typography>
           <Typography variant="h6" fontWeight={700}>
             {components.o3.toPrecision(3)}
           </Typography>

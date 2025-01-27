@@ -1,7 +1,14 @@
 import { createContext, useCallback, useContext, useState } from 'react';
 
 import { CityDataType } from '../../utils/types';
-import { AirPollutionInterface, CityContextInterface, Coord, ForecastInterface, weatherDataInterface } from '../../utils/interfaces';
+import {
+  AirPollutionInterface,
+  CityContextInterface,
+  Coord,
+  ForecastInterface,
+  weatherDataInterface,
+} from '../../utils/interfaces';
+import { ERR_CITY_WEATHER_CONTEXT } from '../../utils/constants';
 
 const CityWeatherContext = createContext<CityContextInterface | undefined>(undefined);
 
@@ -28,7 +35,7 @@ export const CityWeatherContextProvider: React.FC<{ children: React.ReactNode }>
         airPollutionData,
         setAirPollutionData,
         forecastData,
-        setForecastData
+        setForecastData,
       }}
     >
       {children}
@@ -40,7 +47,7 @@ export const useCityWeatherContext = (): CityContextInterface => {
   const context = useContext(CityWeatherContext);
 
   if (!context) {
-    throw new Error('useCityContext must be used within a CityProvider');
+    throw new Error(`${ERR_CITY_WEATHER_CONTEXT}`);
   }
 
   return context;

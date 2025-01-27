@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { CityDataType } from './types';
 
 export interface CityContextInterface {
@@ -13,6 +14,9 @@ export interface CityContextInterface {
   setForecastData: (data: ForecastInterface) => void;
 }
 
+export interface CustomThemeSwitchProps {
+  handleThemeChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
 // Weather interface
 export interface weatherDataInterface {
   coord: Coord;

@@ -1,18 +1,10 @@
-import { Grid2 } from '@mui/material';
 import { useState, useEffect } from 'react';
-// import styled from 'styled-components';
+import { Grid2 } from '@mui/material';
+
 import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
 import { ForecastDailyListItemToShow, weatherDataInterface } from '../../../utils/interfaces';
 import { DailyForecastCard } from './DailyForecastCard';
 import { generateDynamicKey } from '../../../utils';
-
-// const MeasurementsMainSection = styled(Grid2)`
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-between;
-//   align-items: center;
-//   width: 100%;
-// `;
 
 export const DailyForecastList = () => {
   const [listData, setListData] = useState<ForecastDailyListItemToShow[]>([]);
@@ -46,15 +38,8 @@ export const DailyForecastList = () => {
       setListData(forecastItems);
     }
   }, [forecastData, weatherData]);
-  
+
   return (
-    // <MeasurementsMainSection size={12}>
-    //   {listData.map((item: ForecastDailyListItemToShow) => (
-    //     <Grid2 key={generateDynamicKey()} size={{ xs: 2, sm: 4, md: 4 }}>
-    //       <DailyForecastCard key={generateDynamicKey()} {...item} />
-    //     </Grid2>
-    //   ))}
-    // </MeasurementsMainSection>
     <Grid2 container spacing={{ xs: 1, md: 1 }} columns={{ xs: 2, sm: 4, md: 4 }}>
       {Array.from(listData).map((item, index) => (
         <Grid2 key={index} size={{ xs: 1, sm: 1, md: 1 }}>

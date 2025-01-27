@@ -5,10 +5,12 @@ import { FOOTER_MADE, FOOTER_IN, FOOTER_POWERED } from '../../utils/constants';
 
 const FooterContainer = styled.footer`
   align-items: center;
+  background-color: ${({ theme }) => theme.palette.background.default};
   bottom: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 20px;
   position: fixed;
   width: 100%;
 `;

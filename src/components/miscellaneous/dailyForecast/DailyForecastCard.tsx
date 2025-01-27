@@ -1,17 +1,18 @@
 import { Grid2, Tooltip, Typography } from '@mui/material';
-
 import styled from 'styled-components';
+
 import { ForecastDailyListItemToShow } from '../../../utils/interfaces';
 import { getHours, mpsToKmh, transformToCamelCase } from '../../../utils';
+import { CONTENT_DAILY_FORECAST_WIND, THEME_DARK, UNIT_KM_PER_HOUR } from '../../../utils/constants';
 
 const CardContainer = styled(Grid2)`
+  background-color: ${({ theme }) => (theme.palette.mode === THEME_DARK.toLocaleLowerCase() ? '#575757' : '#f2f2f2')};
+  border-radius: 20px !important;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  background-color: ${({ theme }) => (theme.palette.mode === 'dark' ? '#575757' : '#f2f2f2')};
   padding: 10px 20px;
-  border-radius: 20px !important;
   text-align: center;
+  width: 100%;
 `;
 
 const CardTitle = styled.h6`
@@ -20,11 +21,11 @@ const CardTitle = styled.h6`
 `;
 
 const CardContent = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  align-items: center;
   justify-content: space-around;
+  width: 100%;
 `;
 
 export const DailyForecastCard = (item: ForecastDailyListItemToShow) => {
@@ -43,16 +44,16 @@ export const DailyForecastCard = (item: ForecastDailyListItemToShow) => {
         </Tooltip>
         <Typography fontWeight={700}>{temp}°</Typography>
 
-        <Tooltip title={`Wind direction: ${windDirection - 180}°`} placement="top-end">
+        <Tooltip title={`${CONTENT_DAILY_FORECAST_WIND} ${windDirection - 180}°`} placement="top-end">
           <img
             src={`/weather_icons/direction.png`}
             alt={description}
             width={'15%'}
-            style={{ transform: `rotate(${windDirection - 180}deg)`, cursor: 'help', margin: '20px auto'}}
+            style={{ transform: `rotate(${windDirection - 180}deg)`, cursor: 'help', margin: '20px auto' }}
           />
         </Tooltip>
 
-        <Typography fontWeight={700}>{mpsToKmh(windSpeed).toPrecision(2)} km/h</Typography>
+        <Typography fontWeight={700}>{mpsToKmh(windSpeed).toPrecision(2)} {`${UNIT_KM_PER_HOUR}`} </Typography>
       </CardContent>
     </CardContainer>
   );

@@ -52,6 +52,11 @@ export const fetchWeatherByCoords = async (coords: Coord): Promise<weatherDataIn
   return data;
 };
 
+/**
+ * Query to retrieve air quality data from a city
+ * @param coords City coords to fetch de air quality
+ * @returns Air quality data
+ */
 export const fetchAirPollution = async (coords: Coord): Promise<AirPollutionInterface> => {
   if (!coords) return {} as AirPollutionInterface;
 
@@ -68,6 +73,11 @@ export const fetchAirPollution = async (coords: Coord): Promise<AirPollutionInte
   return data;
 };
 
+/**
+ * Query for get forecast data of the city based on its coords
+ * @param coords City coords to fetch de air quality
+ * @returns Forecast data based on the city
+ */
 export const fetchForecastData = async (coords: Coord): Promise<ForecastInterface> => {
   if (!coords) return {} as ForecastInterface;
 

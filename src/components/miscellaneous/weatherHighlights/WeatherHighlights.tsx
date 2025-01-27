@@ -9,19 +9,20 @@ import { SunriseSunset } from './SunriseSunset';
 import { weatherDataInterface } from '../../../utils/interfaces';
 import { getHours } from '../../../utils';
 import { Measurements } from './Measurements';
+import { CONTENT_HIGHLIGHTS_TITLE } from '../../../utils/constants';
 
 const HighlightsContainer = styled(Paper)`
+  border-radius: 20px !important;
   display: flex;
   flex-direction: column;
-  width: 100%;
-  border-radius: 20px !important;
   padding: 20px;
+  width: 100%;
 `;
 
 const TitleSection = styled.section`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
@@ -31,8 +32,13 @@ const HighlightsTitle = styled.h2`
 `;
 
 export const WeatherHighlights = () => {
-  const { cityCoords, setIsFetchingWeather, weatherData, setWeatherData, setAirPollutionData } = useCityWeatherContext();
-  const { refetch: weatherRefetch, isFetching: weatherIsFetching } = useWeatherByCoords({ lat: cityCoords?.lat || 0, lon: cityCoords?.lon || 0 });
+  const { cityCoords, setIsFetchingWeather, weatherData, setWeatherData, setAirPollutionData } =
+    useCityWeatherContext();
+
+  const { refetch: weatherRefetch, isFetching: weatherIsFetching } = useWeatherByCoords({
+    lat: cityCoords?.lat || 0,
+    lon: cityCoords?.lon || 0,
+  });
   const { refetch: airPollutionRefetch, isFetching: airPollutionIsFetching } = useAirPollution({
     lat: cityCoords?.lat || 0,
     lon: cityCoords?.lon || 0,
@@ -68,17 +74,19 @@ export const WeatherHighlights = () => {
   }, [cityCoords]);
 
   const {
-      dt: dateUnix,
-      sys: { country },
-      timezone,
-      name
-    } = weatherData as weatherDataInterface;
+    dt: dateUnix,
+    sys: { country },
+    timezone,
+    name,
+  } = weatherData as weatherDataInterface;
 
   return (
     <HighlightsContainer elevation={9} id="insigths-container">
       <TitleSection>
-        <HighlightsTitle>Todays Highlights</HighlightsTitle>
-        <span>{getHours(dateUnix, timezone)} in {name}, {country}</span>
+        <HighlightsTitle>{CONTENT_HIGHLIGHTS_TITLE}</HighlightsTitle>
+        <span>
+          {getHours(dateUnix, timezone)} in {name}, {country}
+        </span>
       </TitleSection>
       <Grid2 container spacing={1}>
         <AirPollution />

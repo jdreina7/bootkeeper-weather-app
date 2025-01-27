@@ -1,11 +1,12 @@
-import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
 import { Divider, Paper, Typography } from '@mui/material';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import styled from 'styled-components';
 
+import { useCityWeatherContext } from '../../../context/cityWheather/CityWeatherContext';
 import { getDate, kelvinToCelsius, transformToCamelCase } from '../../../utils';
 import { weatherDataInterface } from '../../../utils/interfaces';
+import { CONTENT_NOW_TITLE } from '../../../utils/constants';
 
 const WeatherContainer = styled(Paper)`
   align-items: center;
@@ -18,15 +19,15 @@ const WeatherContainer = styled(Paper)`
 `;
 
 const NowWeatherFirstSection = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
   padding: 5px 20px;
+  width: 100%;
 `;
 
 const WeatherNowTitle = styled.h2`
-    margin-bottom: -20px;
+  margin-bottom: -20px;
 `;
 
 const WeatherTemp = styled.h1`
@@ -34,19 +35,19 @@ const WeatherTemp = styled.h1`
 `;
 
 const Section = styled.section`
+  align-items: center;
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
 
 const WeatherItem = styled.div`
-  display: flex;
   align-items: center;
-  font-size: 1rem;
-  width: 45%;
+  display: flex;
+  font-size: 1.2em;
   margin: 10px;
+  width: 45%;
 `;
 
 export const NowWeatherSection = () => {
@@ -56,23 +57,25 @@ export const NowWeatherSection = () => {
     weather,
     dt: dateUnix,
     sys: { country },
-    main: { temp},
+    main: { temp },
     name,
     timezone,
   } = weatherData as weatherDataInterface;
   const [{ description, icon }] = weather;
 
   return (
-    <WeatherContainer elevation={9} id='main-container-now-wether'>
+    <WeatherContainer elevation={9} id="main-container-now-wether">
       <NowWeatherFirstSection>
         <Section>
-            <WeatherNowTitle>Now</WeatherNowTitle>
+          <WeatherNowTitle>{CONTENT_NOW_TITLE}</WeatherNowTitle>
         </Section>
         <Section>
-          <WeatherTemp>
-            {kelvinToCelsius(temp)}°C
-          </WeatherTemp>
-          <img src={`/weather_icons/${icon === '03d' || icon === '03n' ? '03dn' : icon}.svg`} alt={description} width={150} />
+          <WeatherTemp>{kelvinToCelsius(temp)}°C</WeatherTemp>
+          <img
+            src={`/weather_icons/${icon === '03d' || icon === '03n' ? '03dn' : icon}.svg`}
+            alt={description}
+            width={150}
+          />
         </Section>
         <Section>
           <Typography variant="h5" gutterBottom>
@@ -85,14 +88,14 @@ export const NowWeatherSection = () => {
 
       <Section>
         <WeatherItem color="textDisabled">
-          <EventAvailableIcon sx={{ fontSize: 20 }} />
-          {getDate(dateUnix, timezone)}
+          <LocationOnIcon sx={{ fontSize: 25 }} />
+          {name}, {country}
         </WeatherItem>
       </Section>
       <Section>
         <WeatherItem color="textDisabled">
-          <LocationOnIcon sx={{ fontSize: 20 }} />
-          {name}, {country}
+          <EventAvailableIcon sx={{ fontSize: 25, marginRight: '5px' }} />
+          {getDate(dateUnix, timezone)}
         </WeatherItem>
       </Section>
     </WeatherContainer>

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { createTheme, CssBaseline, ThemeProvider } from '@mui/material';
 import styled from 'styled-components';
-import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
+import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components';
 
 import './index.css';
 
@@ -20,6 +20,7 @@ const AppContainer = styled.div`
 const ContentWrapper = styled.main`
   align-items: center;
   display: flex;
+  padding: 0px 20px;
 `;
 
 function App() {
@@ -32,19 +33,19 @@ function App() {
   });
 
   return (
-      <ThemeProvider theme={appTheme}>
-        <StyledComponentsThemeProvider theme={appTheme}>
-          <AppContainer id='main-app-container'>
-            <CssBaseline />
-            <Header />
-            <ContentWrapper>
-              <Content />
-            </ContentWrapper>
-          </AppContainer>
-          <Footer />
-        </StyledComponentsThemeProvider>
-      </ThemeProvider>
-  )
+    <ThemeProvider theme={appTheme}>
+      <StyledComponentsThemeProvider theme={appTheme}>
+        <AppContainer id="main-app-container">
+          <CssBaseline />
+          <Header />
+          <ContentWrapper>
+            <Content />
+          </ContentWrapper>
+        </AppContainer>
+        <Footer />
+      </StyledComponentsThemeProvider>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
